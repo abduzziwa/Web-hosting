@@ -1,0 +1,5 @@
+/home/abdulz/Desktop/Web hosting/direcotries/website1;
+/home/abdulz/Desktop/Web hosting/direcotries/website2;
+
+
+check for direcotries
