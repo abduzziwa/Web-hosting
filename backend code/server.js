@@ -3,9 +3,11 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-
+const cors = require("cors");
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 // Set up multer for file uploads
 const storage = multer.diskStorage({
@@ -147,7 +149,7 @@ app.post(
     // Generate virtual host configuration file
     const confContent = `
 <VirtualHost *:80>
-    ServerAdmin webmaster@${jsonData.DomainName}
+    ServerAdmin Abdul.Zziwa@student.gildeopleingen.nl
     DocumentRoot ${jsonData.Directory}
     ServerName ${jsonData.DomainName}
     ServerAlias www.${jsonData.DomainName}
@@ -158,16 +160,15 @@ app.post(
         Require all granted
     </Directory>
 
-    ErrorLog /var/log/httpd/${jsonData.DomainName}_error.log
-    CustomLog /var/log/httpd/${jsonData.DomainName}_access.log combined
+    ErrorLog /var/log/apache2/${jsonData.DomainName}_error.log
+    CustomLog /var/log/apache2/${jsonData.DomainName}_access.log combined
 </VirtualHost>
 `;
 
     // const confFilePath = "/virtual_hosts/vhost.conf";//feora
-    // const confFilePath =
-    ("C:\\Users\\Gebruiker\\Desktop\\web\\Web-hosting\\backend code\\virtual_hosts\\vhost.conf"); // Windows
+     const confFilePath = "/etc/apache2/sites-available/000-default.conf"
+    //("C:\\Users\\Gebruiker\\Desktop\\web\\Web-hosting\\backend code\\virtual_hosts\\vhost.conf"); // Windows
 
-    // const confFilePath = "/etc/apache2/sites-available/000-default.conf"; //apache
 
     // Append confContent to vhost.conf file
     fs.appendFileSync(confFilePath, confContent);

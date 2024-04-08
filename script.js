@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function sendDataToServer(formData) {
-    fetch("http://localhost:3000/upload", {
+    fetch("http://192.168.68.105:3000/upload", {
       method: "POST",
       body: formData,
     })
@@ -62,17 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         console.log("Response from server:", data);
-        // Assuming the server responds with 'Success' or 'Failed'
-        if (data === "Success") {
-          window.location.href = "success.html"; // Redirect to success page
-        } else if (data === "Failed") {
-          window.location.href = "failed.html"; // Redirect to failed page
-        } else {
-          console.error("Unexpected response from server:", data);
-        }
+        // Assuming the server responds with HTML content
+        document.body.innerHTML = data; // Update the body with HTML response
+        // Reset the form
+        form.reset(); // Reset the form using the form element itself
       })
       .catch((error) => {
         console.error("Error sending data to server:", error);
       });
   }
 });
+
