@@ -3,3 +3,5 @@
 
 
 check for direcotries
+
+[/var/www/html/website1,/var/www/html/website2,/var/www/html/website3,/var/www/html/website4]
